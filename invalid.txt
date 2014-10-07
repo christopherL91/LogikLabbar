@@ -1,0 +1,17 @@
+[and(p,or(q,r))].
+
+imp(q,and(and(p,q),and(p,r))).
+
+[
+	[1, and(p,or(q,r)), premise],
+	[2, p, andel1(1)],
+	[3, or(q,r), andel2(1)],
+	[
+		[4, q, assumption],
+		[5, r, assumption],
+		[6, and(p,q), andint(2,4)],
+		[7, and(p,r), andint(2,5)],
+		[8, and(and(p,q),and(p,r)), andint(6,7)]
+	],
+	[9, imp(q,and(and(p,q),and(p,r))), impint(4,8)]
+].
