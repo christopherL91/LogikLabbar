@@ -29,9 +29,9 @@ valid_rule(orel(RX,RY,RU,RV,RW),Result,Proofs,_) :-
 	RY =< RU,
 	RV =< RW,
 	row(Proofs, RX, or(X,Y), _), 
-	boxrow(Proofs, RY, X, _),
+	boxrow(Proofs, RY, X, assumption),
 	boxrow(Proofs, RU, Result, _), 
-	boxrow(Proofs, RV, Y, _),
+	boxrow(Proofs, RV, Y, assumption),
 	boxrow(Proofs, RW, Result, _).
 valid_rule(impint(RX,RY),imp(X,Y),Proofs,_) :-
 	Y = X; 
@@ -44,7 +44,7 @@ valid_rule(impel(RX,RY), Y, Proofs, _) :-
 	row(Proofs, RY, imp(X,Y),_).
 valid_rule(negint(RX,RY), neg(X), Proofs, _) :- 
 	RX =< RY,
-	boxrow(Proofs, RX, X, _),
+	boxrow(Proofs, RX, X, assumption),
 	boxrow(Proofs, RY, cont, _).
 valid_rule(negel(RX,RY), cont, Proofs, _) :-
 	row(Proofs, RX, X, _),
@@ -60,7 +60,7 @@ valid_rule(mt(RX,RY), neg(X), Proofs, _) :-
 	row(Proofs, RY, neg(Y), _).
 valid_rule(pbc(RX,RY), X, Proofs, _) :-
 	RX =< RY,
-	boxrow(Proofs, RX, neg(X), _),
+	boxrow(Proofs, RX, neg(X), assumption),
 	boxrow(Proofs, RY, cont, _).
 valid_rule(lem, or(X,neg(X)), _, _).
 valid_rule(lem, or(neg(X),X), _, _).
