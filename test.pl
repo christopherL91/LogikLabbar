@@ -1,0 +1,2 @@
+man(kalle).
+man(lisa).

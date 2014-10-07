@@ -2,15 +2,19 @@
 \usepackage[T1]{fontenc}
 \usepackage[utf8]{inputenc}
 \usepackage{lmodern}
+\usepackage{listings}
 \usepackage{verbatim}
 \usepackage{multicol}
 \usepackage{csquotes}
 \usepackage{fancyhdr}
+\usepackage{color}
 \usepackage{amsmath}
 \usepackage{graphicx}
 \usepackage{bbm}
 \usepackage{amssymb}
 \usepackage{wrapfig}
+\include{code}
+
 \title{Labb 1 \\ Logic for computer science}
 \author{
   {\bf Christopher Lillthors}\\
@@ -48,6 +52,6 @@ Hello world
 \clearpage
 \setcounter{page}{1}
 \section{Introduction}
-\newpage
-\section{something}
+\lstinputlisting{test.pl}
+\section{Problem}
 \end{document}
