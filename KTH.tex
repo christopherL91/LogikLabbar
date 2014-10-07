@@ -7,6 +7,7 @@
 \usepackage{multicol}
 \usepackage{csquotes}
 \usepackage{fancyhdr}
+\usepackage{longtable}
 \usepackage{color}
 \usepackage{amsmath}
 \usepackage{natded}
@@ -99,6 +100,36 @@ Hello world
 }
 \]
 \end{figure}
+
+\section{Rules}
+Table of rules
+\begin{center}
+    \begin{longtable}{ | l p{10cm}|}
+    \hline
+    \textbf{Rule} & \textbf{True When}\\ \hline
+    premise & always \\ \hline
+    assumption & start of a sub proof \\ \hline
+    row $x$ & x is lesser than current row \\ \hline
+    copy $x$ & row x exists \\ \hline
+    $\land i \; x,y$ & rows x and y exists and contains the left and right operands respectively \\ \hline
+    $\land e_1 \; x$ & row x exists and contains a statement containing $\land$ with the result preceeding the operator \\ \hline
+	$\land e_2 \; x$ & row x exists and contains a statement containing $\land$ with the result succeeding the operator \\ \hline
+	$\lor i_1 \; x$ & row x exists and contains the left operand of the resulting $\lor$ operation. \\ \hline
+	$\lor i_2 \; x$ & row x exists and contains the right operand of the resulting $\lor$ operation. \\ \hline
+	$\lor e \; x,y-u,v-w$ & all rows exists and $y \leq u$ and $v \leq w$ and rows u and w both containing the result \\ \hline
+	$\to i \; x-y$ & $x \leq y$ row x contains an assumption with the left operand and row y the right operand \\ \hline
+	$\to e \; x,y$ & row y contains an implication and row x contains that implication's left operand and the result is the right operand \\ \hline
+	$\neg i \; x-y$ & $x \leq y$ and row x contains an assumption and row y contains a contradiction \\ \hline
+	$\neg e \; x,y$ & row y contains the negation of row x and the result is a contradiction \\ \hline
+	$\bot e \; x$ & row x contains a contradiction \\ \hline
+	$\neg \neg i \; x$ & the result contains the double negation of row x \\ \hline
+	$\neg \neg e \; x$ & row x contains the double negation of the result \\ \hline
+	MT x,y & row x contains $a \to b$ and row y $\neg b$ and the result is $\neg a$ \\ \hline
+	PBC $x-y$ & $x \leq y$ and row x contains an assumption for $\neg a$ and row y contains a contradiction and the result is a \\ \hline
+	LEM & the result is $a \lor \neg a$ \\ \hline
+    \end{longtable}
+\end{center}
+For all ranges $x-y$ in the above table both row x and row y are inside a sub proof (box).
 % include code in document
 \lstinputlisting{test.pl}
 \section{Problem}
