@@ -56,7 +56,7 @@ Hello world
 \setcounter{page}{1}
 \section{Proofs}
 
-A simple valid proof.
+\subsection{A simple valid proof}
 \[
 \Jproof{
 	\cablk{
@@ -77,8 +77,8 @@ A simple valid proof.
 	}
 }
 \]
-
-A simple invalid proof.
+\newpage
+\subsection{A simple invalid proof}
 \[
 \Jproof{
 	\cablk{
@@ -97,7 +97,7 @@ A simple invalid proof.
 }
 \]
 This proof is invalid because line 5 has an assumption for $r$ that is part of the sub proof where $q$ is already assumed.
-
+\newpage
 \section{Rules}
 \label{sec:Rules}
 Table of rules
@@ -168,7 +168,7 @@ In order to add more rules there's a big need for rewriting the implementation.
 
 By analyzing the implementation of the proof validation we can conclude that there is no part that has a worse than linear time complexity. However further analysis may further give insight into where the implementation ought to be optimized.
 \section{Conclusion}
-We have implemented a method for testing if natural deduction is possible for a given proof and the validity of the proof.
+We have implemented a method for testing with software if natural deduction is possible for a given proof and the validity of the proof in the case such as there are no other rules used than those specified in section~\ref{sec:Rules}.
 \newpage
 \begin{appendices}
 \section{Source code}
