@@ -13,7 +13,6 @@
 \usepackage{amsmath}
 \usepackage{natded}
 \usepackage{graphicx}
-\usepackage{bbm}
 \usepackage{amssymb}
 \usepackage{wrapfig}
 % include code listing options
@@ -139,11 +138,23 @@ For every rule we apply the definition and confirm that it holds considering the
 
 For all the following rows we apply the same rule validation as above.
 \section{Implementation}
-Show parts of Prolog implementation
+In the Prolog implementation of the proof validation the proof is reversed in order to be able to utilize the head-tail functionality of the language. While reversed the list is then traversed line by line checking the rule for every line. Because the head is exhausted it is then not necessary to ensure that no index refers to a previous row as those are eliminated when continuing the traversal of the proof.
+
+In case that the next line is a part of sub proof, the sub proof is then expanded and the rest of the proof is handled as if the sub proof was a part of the main proof.
+
+Invalid assumptions that are found in a pre-processing step before checking the validity of the other properties of the proof. An assumption is considered invalid if it is in any other position than the first of a subproof.
+
+The validity of other rules are ensured by pattern-matching both the rule (right hand side) and the result (left hand side) with the rows referred to by the indicies in the rule. For example $\land e_i$ rule validation is performed by matching the left operand of the referred row with the result of the current row. The implementation for this rule in Prolog is:
+\begin{lstlisting}[frame=single,language=Prolog]
+%signature: valid_rule(Rule,Result,Rows,Premises). 
+valid_rule(andel1(RX),X,Rows,_):- row(Rows, RX, and(X,_),_).
+\end{lstlisting}
+
+Since all rules are given in prefix notation, i.e. the rule name is always preceeding all arguments and as such can without transformation be implemented using predicates. 
 \section{Results}
-All given tests pass including our own.
+The Prolog implementation 
 \section{Discussion}
-Note that while all given tests pass but there are some cases where the implementation still might fail.
+Note that while all given tests pass but there are some cases where the implementation still might fail. 
 \section{Conclusion}
 We have implemented a method for testing if natural deduction is possible for a given proof and the validity of the proof.
 \newpage
