@@ -131,7 +131,13 @@ Table of rules
 For all ranges $x-y$ in the above table both row x and row y are inside a sub proof (box).
 
 \section{Algorithm}
-[Describe algorithm step by step]
+The first step of the proof checking is to start at either the first or the last row. In this example we will only choose the first row.
+
+For that row we ensure that the given rule is valid by checking that no index refers to a row that is below the current row and if we have a rule that refers to a sub proof, we ensure that it only checks the first and last rows of the range referring to that sub proof.
+
+For every rule we apply the definition and confirm that it holds considering the result on the current row and all referred rows specified by indices. We then proceed to the following row and apply the same rule validation for that row until we reach the end of the proof.
+
+For all the following rows we apply the same rule validation as above.
 \section{Implementation}
 Show parts of Prolog implementation
 \section{Results}
@@ -139,7 +145,7 @@ All given tests pass including our own.
 \section{Discussion}
 Note that while all given tests pass but there are some cases where the implementation still might fail.
 \section{Conclusion}
-We have implemented a method for testing if natural deducation is possible for a given proof and the validity of the proof.
+We have implemented a method for testing if natural deduction is possible for a given proof and the validity of the proof.
 \newpage
 \begin{appendices}
 \section{Source code}
