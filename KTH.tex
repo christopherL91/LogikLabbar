@@ -144,17 +144,25 @@ In case that the next line is a part of sub proof, the sub proof is then expande
 
 Invalid assumptions that are found in a pre-processing step before checking the validity of the other properties of the proof. An assumption is considered invalid if it is in any other position than the first of a subproof.
 
-The validity of other rules are ensured by pattern-matching both the rule (right hand side) and the result (left hand side) with the rows referred to by the indicies in the rule. For example $\land e_i$ rule validation is performed by matching the left operand of the referred row with the result of the current row. The implementation for this rule in Prolog is:
+The validity of other rules are ensured by pattern-matching both the rule (right hand side) and the result (left hand side) with the rows referred to by the indicies in the rule. For example $\land e_i$ rule validation is performed by matching the left operand of the referred row with the result of the current row.
+\newpage
+The implementation for this rule in Prolog is:
+
 \begin{lstlisting}[frame=single,language=Prolog]
-%signature: valid_rule(Rule,Result,Rows,Premises). 
+%signature: valid_rule(Rule,Result,Rows,Premises).
 valid_rule(andel1(RX),X,Rows,_):- row(Rows, RX, and(X,_),_).
 \end{lstlisting}
 
-Since all rules are given in prefix notation, i.e. the rule name is always preceeding all arguments and as such can without transformation be implemented using predicates. 
+Since all rules are given in prefix notation, i.e. the rule name is always preceding all arguments and as such can without transformation be implemented using predicates.
 \section{Results}
-The Prolog implementation 
+The Prolog implementation
 \section{Discussion}
-Note that while all given tests pass but there are some cases where the implementation still might fail. 
+Note that while all given tests pass but there are some cases where the implementation still might fail.
+
+It's not an easy job to add more rules into the actual implementation, since more and more rules depend on each other.
+In order to add more rules there's a big need for rewriting the implementation.
+
+While we implemented the algorithm we thought about the most time consuming
 \section{Conclusion}
 We have implemented a method for testing if natural deduction is possible for a given proof and the validity of the proof.
 \newpage
