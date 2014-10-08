@@ -78,7 +78,6 @@ A simple valid proof.
 }
 \]
 
-
 A simple invalid proof.
 \[
 \Jproof{
@@ -97,9 +96,10 @@ A simple invalid proof.
 	}
 }
 \]
-
+This proof is invalid because line 5 has an assumption for $r$ that is part of the sub proof where $q$ is already assumed.
 
 \section{Rules}
+\label{sec:Rules}
 Table of rules
 \begin{center}
     \begin{longtable}{ l p{10cm}}
@@ -155,14 +155,18 @@ valid_rule(andel1(RX),X,Rows,_):- row(Rows, RX, and(X,_),_).
 
 Since all rules are given in prefix notation, i.e. the rule name is always preceding all arguments and as such can without transformation be implemented using predicates.
 \section{Results}
-The Prolog implementation
+The Prolog implementation gives correct output for both of the created proofs and all of the given test cases.
+
+Despite the implementation not being optimized for memory usage or execution time the linear structure of the problem allows for fast verification with early return on failure to verify a rule. However, it should be noted that the implementation has not been tested on more complex or larger proofs than those given.
+
 \section{Discussion}
 Note that while all given tests pass but there are some cases where the implementation still might fail.
+The handling of sub proofs is especially error prone and it is to be expected that it may fail on edge cases.
 
 It's not an easy job to add more rules into the actual implementation, since more and more rules depend on each other.
 In order to add more rules there's a big need for rewriting the implementation.
 
-While we implemented the algorithm we thought about the most time consuming
+By analyzing the implementation of the proof validation we can conclude that there is no part that has a worse than linear time complexity. However further analysis may further give insight into where the implementation ought to be optimized.
 \section{Conclusion}
 We have implemented a method for testing if natural deduction is possible for a given proof and the validity of the proof.
 \newpage
