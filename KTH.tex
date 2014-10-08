@@ -1,5 +1,6 @@
 \documentclass[a4paper,11pt]{article}
 \usepackage[T1]{fontenc}
+\usepackage[toc,page]{appendix}
 \usepackage[utf8]{inputenc}
 \usepackage{lmodern}
 \usepackage{listings}
@@ -21,9 +22,9 @@
 \title{Labb 1 \\ Logic for computer science}
 \author{
   {\bf Christopher Lillthors}\\
-  \textbf{911005 -- 3817} \\\\
+  \textbf{911005-3817} \\\\
   {\bf Viktor Kronvall}\\
-  \textbf{92...}\\
+  \textbf{920225-5478}\\
   \\
   Kurskod: DD1350\\
   %Ev gruppnummer\\
@@ -36,8 +37,8 @@
 \setlength{\headheight}{54pt}
 \fancyfoot[C,R]{\thepage}
 \fancyfoot[C]{}
+\rhead{\textbf{Labb 1 -- Lillthors \& Kronvall} \\ \date{\today} \\ \ \\}
 \lhead{\textbf{Royal Institute of Technology} \\ School of Computer science and communication \\ Civilingenjörsprogrammet Datateknik}
-\rhead{\textbf{Labb 1} \\ \date{\today} \\ \ \\}
 \setlength{\parindent}{0in}
 \setlength{\parskip}{0.1in}
 \date{\today}
@@ -54,10 +55,9 @@ Hello world
 \newpage
 \clearpage
 \setcounter{page}{1}
-\section{Introduction}
+\section{Proofs}
 
-\begin{figure}
-\caption{A simple valid proof}
+A simple valid proof.
 \[
 \Jproof{
 	\cablk{
@@ -78,10 +78,9 @@ Hello world
 	}
 }
 \]
-\end{figure}
 
-\begin{figure}
-\caption{A simple invalid proof}
+
+A simple invalid proof.
 \[
 \Jproof{
 	\cablk{
@@ -99,12 +98,12 @@ Hello world
 	}
 }
 \]
-\end{figure}
+
 
 \section{Rules}
 Table of rules
 \begin{center}
-    \begin{longtable}{ | l p{10cm}|}
+    \begin{longtable}{ l p{10cm}}
     \hline
     \textbf{Rule} & \textbf{True When}\\ \hline
     premise & always \\ \hline
@@ -124,13 +123,26 @@ Table of rules
 	$\bot e \; x$ & row x contains a contradiction \\ \hline
 	$\neg \neg i \; x$ & the result contains the double negation of row x \\ \hline
 	$\neg \neg e \; x$ & row x contains the double negation of the result \\ \hline
-	MT x,y & row x contains $a \to b$ and row y $\neg b$ and the result is $\neg a$ \\ \hline
+	MT $x,y$ & row x contains $a \to b$ and row y $\neg b$ and the result is $\neg a$ \\ \hline
 	PBC $x-y$ & $x \leq y$ and row x contains an assumption for $\neg a$ and row y contains a contradiction and the result is a \\ \hline
 	LEM & the result is $a \lor \neg a$ \\ \hline
     \end{longtable}
 \end{center}
 For all ranges $x-y$ in the above table both row x and row y are inside a sub proof (box).
-% include code in document
-\lstinputlisting{test.pl}
-\section{Problem}
+
+\section{Algorithm}
+[Describe algorithm step by step]
+\section{Implementation}
+Show parts of Prolog implementation
+\section{Results}
+All given tests pass including our own.
+\section{Discussion}
+Note that while all given tests pass but there are some cases where the implementation still might fail.
+\section{Conclusion}
+We have implemented a method for testing if natural deducation is possible for a given proof and the validity of the proof.
+\newpage
+\begin{appendices}
+\section{Source code}
+\lstinputlisting{labb1.pl}
+\end{appendices}
 \end{document}
