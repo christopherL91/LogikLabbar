@@ -1,0 +1,64 @@
+\documentclass[a4paper,11pt]{article}
+\usepackage[T1]{fontenc}
+\usepackage[toc,page]{appendix}
+\usepackage[utf8]{inputenc}
+\usepackage{lmodern}
+\usepackage{listings}
+\usepackage{verbatim}
+\usepackage{multicol}
+\usepackage{csquotes}
+\usepackage{fancyhdr}
+\usepackage{longtable}
+\usepackage{color}
+\usepackage{amsmath}
+\usepackage{natded}
+\usepackage{graphicx}
+\usepackage{amssymb}
+\usepackage{wrapfig}
+% include code listing options
+\include{code}
+
+\title{Labb 2 \\ Logic for computer science}
+\author{
+  {\bf Christopher Lillthors}\\
+  \textbf{911005-3817} \\\\
+  {\bf Viktor Kronvall}\\
+  \textbf{920225-5478}\\
+  \\
+  Kurskod: DD1350\\
+  %Ev gruppnummer\\
+  KTH -- HT14\\
+  lillt@kth.se\\
+  vkr@kth.se
+}
+
+\pagestyle{fancy}
+\setlength{\headheight}{54pt}
+\fancyfoot[C,R]{\thepage}
+\fancyfoot[C]{}
+\rhead{\textbf{Labb 1 -- Lillthors \& Kronvall} \\ \date{\today} \\ \ \\}
+\lhead{\textbf{Royal Institute of Technology} \\ School of Computer science and communication \\ Civilingenjörsprogrammet Datateknik}
+\setlength{\parindent}{0in}
+\setlength{\parskip}{0.1in}
+\date{\today}
+\begin{document}
+\maketitle
+\thispagestyle{empty}
+\begin{abstract}
+
+\end{abstract}
+\renewcommand{\arraystretch}{1.2}
+\newpage
+\thispagestyle{empty}
+\tableofcontents
+\newpage
+\clearpage
+\setcounter{page}{1}
+\section{Proofs}
+
+\newpage
+\begin{appendices}
+\section{Source code}
+\lstinputlisting{labb2.pl}
+\end{appendices}
+\end{document}

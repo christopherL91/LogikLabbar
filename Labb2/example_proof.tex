@@ -1,0 +1,21 @@
+\subsection{A simple valid proof}
+\[
+\Jproof{
+	\cablk{
+		\proofline{p \land (q \lor r)}{premise}
+		\proofline{p}{$\land e_1 \: 1$}
+		\proofline{q \lor r}{$\land e_2 \: 1$}
+		\cablk{
+			\proofline{q}{assumption}
+			\proofline{p \land q}{$\land i \: 2,4$}
+			\proofline{(p \land q)\lor (p \land r)}{$\lor i_{1} \: 5$}
+		}
+		\cablk{
+			\proofline{r}{assumption}
+			\proofline{p \land r}{$\land i \: 2,7$}
+			\proofline{(p \land q)\lor (p \land r)}{$\lor i_{2} \: 8$}
+		}
+		\proofline{(p \land q)\lor (p \land r)}{$\lor e \: 3,4-6,7-9$}
+	}
+}
+\]
