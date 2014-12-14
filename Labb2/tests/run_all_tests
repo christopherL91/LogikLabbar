@@ -1,4 +1,4 @@
-
+#!/bin/bash
 if [ $# -ne 1 ]
 then
     echo "Please provide a solution to test."
@@ -14,4 +14,4 @@ fi
 
 
 
-prolog --query-goal "['run_all_tests.pl'], run_all_tests('$1')"
+swipl -g "['run_all_tests.pl'], run_all_tests('$1')"
