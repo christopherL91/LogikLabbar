@@ -1,0 +1,25 @@
+[[start, [login_request,unauthorized_request]],
+[unauthorized_request,[unauthorized_response]],
+[unauthorized_response,[start]],
+[login_request,[login_response]],
+[login_response,[start,logged_in]],
+[logged_in,[request,logout_request]],
+[request,[response]],
+[response,[logged_in]],
+[logout_request,[logout_response]],
+[logout_response,[start]]].
+
+[[start,[]],
+ [unauthorized_request,[request]],
+ [unauthorized_response,[response]],
+ [login_request,[login,request]],
+ [login_response,[login,response]],
+ [logged_in,[logged_in]],
+ [request,[logged_in,request]],
+ [response,[logged_in,response]],
+ [logout_request,[logged_in,request,logout]],
+ [logout_response,[response,logout]]].
+
+login_response.
+
+ax(logged_in).

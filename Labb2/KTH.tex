@@ -2,6 +2,7 @@
 \usepackage[T1]{fontenc}
 \usepackage[toc,page]{appendix}
 \usepackage[utf8]{inputenc}
+\usepackage{lipsum}
 \usepackage{lmodern}
 \usepackage{listings}
 \usepackage{verbatim}
@@ -12,11 +13,16 @@
 \usepackage{color}
 \usepackage{amsmath}
 \usepackage{natded}
+\usepackage{verbatimbox}
 \usepackage{graphicx}
+\usepackage{fancyvrb}
 \usepackage{amssymb}
 \usepackage{wrapfig}
 % include code listing options
 \include{code}
+
+\newcounter{question}
+\setcounter{question}{0}
 
 \title{Labb 2 \\ Logic for computer science}
 \author{
@@ -42,10 +48,16 @@
 \setlength{\parskip}{0.1in}
 \date{\today}
 \begin{document}
+
+%Include the Q&A commands
+\include{qa}
+
 \maketitle
 \thispagestyle{empty}
 \begin{abstract}
 
+This paper describes a simple model verification system written in the programming language Prolog.
+The system can verify models for a variety of rules given that the input is written using CTL.
 \end{abstract}
 \renewcommand{\arraystretch}{1.2}
 \newpage
@@ -54,11 +66,67 @@
 \newpage
 \clearpage
 \setcounter{page}{1}
-\section{Proofs}
+
+\section{Background}
+
+\newpage
+
+\section{Example model}
+We construct a model $\mathcal{M}$ for a web client that is accessing a server which requires authentication and authorization
+before some of the resources hosted by the server may be accessed.
+\begin{figure}[ht]
+\caption{Graph of the model}
+\includegraphics[scale=0.6]{model.pdf}
+\label{fig:graph}
+\end{figure}
+
+\newpage
+\subsection{Valid assumption}
+Given the state \textit{logged in} assume that $EF(\neg logged \: in)$ holds.
+
+This formula describes the condition that given a logged in state, there is a path
+to reach a state where one is not logged in.
+
+By analyzing the graph in figure \ref{fig:graph} we can see that one possible state that is reachable from
+\textit{logged in} is the state \textit{start} where one is not logged in. Therefore we can conclude that this is intuitively correct.
+
+\subsection{Invalid assumption}
+Given the state \textit{login response} assume that $AX(logged \: in)$ holds.
+
+This formula describes the condition that given a login response state, the next state must contain the propositional variable \textit{logged in}, i.e $L(s)=logged \: in$.
+
+By analyzing the graph in figure \ref{fig:graph} and looking at the paths from \textit{login response} there is one path that describes a failed login where one is sent back to the \textit{start} state. Given this we deduce that the assumption does not hold as $logged \: in \notin L(start)$.
+
+\section{Implementation}
+
+\section{Results}
+All the given tests are passing.
+
+\section{Questions}
+
+\Que{What's the difference between your implementation and the implementation written in the text book?}
+%TODO
+\Ans{
+  contradictions
+  until
+  implications
+}
+
+\Que{How did you handle a variable number of premises in rules?}
+\Ans{We use the built in predicate \textit{member} to iterate over all the neighbors.}
+
+\Que{How big models can you handle with your implementation?}
+\Ans{The time complexity $\mathcal{O}(n^p)$ increases by a factor for each time a rule that is using all neighbors to a state. That means that $p$ is increased by one for each time and we quickly approach a cubic asymptotic progression of the time $\mathcal{O}(n^3)$. This leads to an untenable situation for solving formulas in a reasonable amount of time for bigger models. For example, a model that has $10^3$ neighbors for each state, progressing only three states from the starting state will result in over $10^9$ checks being performed.}
+
+% \mathcal{p} \fraq{-}{}p \in L(s)
 
 \newpage
 \begin{appendices}
 \section{Source code}
 \lstinputlisting{labb2.pl}
+\section{Valid assumption}
+\verbatiminput{valid_model.txt}
+\section{Invalid assumption}
+\verbatiminput{invalid_model.txt}
 \end{appendices}
 \end{document}
