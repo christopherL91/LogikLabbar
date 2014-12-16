@@ -1,0 +1,27 @@
+digraph { 
+  forcelabels=true;
+  nodesep=0.9;
+  startreq [label="request";xlabel="unauthorized request"]
+  startres [label="response";xlabel="unauthorized response"]
+  start [label="";xlabel="start"]
+  loginreq [label="login\nrequest";xlabel="login request";nlp="9.0,-9.0"] 
+  loginres [label="login\nresponse";xlabel="login response"] 
+  request [label="logged in\nrequest";xlabel="request"]
+  response [label="logged in\nresponse";xlabel="response"]
+  loggedin [label="logged in";xlabel="logged in"]
+  logoutreq [label="logged in\nrequest\nlogout";xlabel="logout request"]
+  logoutres [label="response\nlogout";xlabel="logout response"]
+  start -> startreq
+  startreq -> startres
+  startres -> start
+  start -> loginreq 
+  loginreq -> loginres
+  loginres -> start
+  loginres -> loggedin
+  loggedin -> request
+  request -> response
+  response -> loggedin
+  loggedin -> logoutreq
+  logoutreq -> logoutres
+  logoutres -> start
+} 
