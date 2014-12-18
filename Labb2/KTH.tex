@@ -15,6 +15,7 @@
 \usepackage{graphicx}
 \usepackage{fancyvrb}
 \usepackage{amssymb}
+\usepackage{pbox}
 \usepackage{wrapfig}
 % include code listing options
 \include{code}
@@ -65,11 +66,12 @@ The system can verify models for a variety of rules given that the input is writ
 \clearpage
 \setcounter{page}{1}
 
-\section{Background}
+% \section{Background}
+% Write something here if you have anything to write :)
+% \newpage
 
-\newpage
-
-\section{Example model}
+\section{Example models}
+\label{models}
 We construct a model $\mathcal{M}$ for a web client that is accessing a server which requires authentication and authorization
 before some of the resources hosted by the server may be accessed.
 \begin{figure}[ht]
@@ -97,8 +99,49 @@ By analyzing the graph in figure \ref{fig:graph} and looking at the paths from \
 
 \section{Implementation}
 
+The following rules were implemented for models.
+\newline
+% \begin{figure}[ht]
+\includegraphics[scale=0.48]{rules.png}
+% \caption{asd}
+% \end{figure}
+\newpage
+\subsection{Predicates for rules}
+In the following table of predicates, a list of propositional letters $L$, a list of visited states along the path $U$ and a predicate $Neighbor(a,b)$ that solves if $a$ and $b$ are neighbors, are assumed.
+\begin{center}
+\begin{tabular}{ | l | c | }
+  Rule & Condition \\
+  \hline
+  $Check(s,p)$ & $p \in L(s)$ \\
+  $Check(s,\neg p)$ & $p \notin L(s)$ \\
+  $And(s,\phi,\psi) $ & $Check(s,\phi) \land Check(s,\psi)$ \\
+  $Or1(s,\phi,\psi) $ & $Check(s,\phi)$ \\
+  $Or2(s,\phi,\psi) $ & $Check(s,\psi)$ \\
+  $Or(s,\phi,\psi) $ & $Or1(s,\phi,\psi) \lor Or2(s,\phi,\psi)$ \\
+  $AX(s,\phi) $ & $\forall x : Neighbor(s,x)\land Check(x,phi)$ \\
+  $AG1(U,s,\phi) $ & $s \in U$ \\
+  $AG2(U,s,\phi) $ & \pbox{11cm}{\centering$s \notin U \land Check(s,\phi) \land (\forall x : Neighbor(s,x)\land AG([U|s],x,\phi) \land Check(x,\phi))$} \\
+  $AG(U,s,\phi) $ & $AG1(U,s,\phi) \lor AG2(U,s,\phi)$ \\
+  $AF1(U,s,\phi) $ & $s \notin U \land Check(s,\phi)$ \\
+  $AF2(U,s,\phi) $ & $s \notin U \land (\forall x : Neighbor(s,x)\land AF(U,x,\phi))$ \\
+  $AF(U,s,\phi) $ & $AF1(U,s,\phi) \lor AF2(U,s,\phi)$ \\
+  $EX(U,s,\phi)$ & $\exists x(Neighbor(x,s) \land Check(x,\phi))$ \\
+  $EG1(U,s,\phi)$ & $s \in U$ \\
+  $EG2(U,s,\phi)$ & $s \notin U \land Check(s,\phi) \land \exists x (Neighbor(x,s) \land EG(U,s,\phi) )$ \\
+  $EG(U,s,\phi)$ & $EG1(U,s,\phi) \lor EG2(U,s,\phi)$ \\
+  $EF1(U,s,\phi)$ & $s \notin U \land Check(s,\phi)$ \\
+  $EF2(U,s,\phi)$ & $s \notin U \land \exists x (Neighbor(x,s) \land EF([U|s],x,\phi))$ \\
+  $EF(U,s,\phi)$ & $EF1(U,s,\phi) \lor EF2(U,s,\phi)$ \\
+\end{tabular}
+\end{center}
+
+The model checking with the above predicates was then implemented in the Prolog programming language by pattern matching the several rules. Also, in the prolog implementation all the rules were recursively matched as an argument to the $Check$ predicate in order to allow for a rule that is called on another rule.
+
 \section{Results}
-All the given tests are passing.
+
+Both of the example models in section \ref{models} were correctly handled by the Prolog implementation yielding a $true$ result for the valid assumption and a $false$ result for the invalid one.
+
+In addition to that the 733 test cases given by KTH also passed with correct results.
 
 \section{Questions}
 
