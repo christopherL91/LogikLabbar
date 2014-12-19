@@ -66,10 +66,6 @@ The system can verify models for a variety of rules given that the input is writ
 \clearpage
 \setcounter{page}{1}
 
-% \section{Background}
-% Write something here if you have anything to write :)
-% \newpage
-
 \section{Example models}
 \label{models}
 We construct a model $\mathcal{M}$ for a web client that is accessing a server which requires authentication and authorization
@@ -101,10 +97,7 @@ By analyzing the graph in figure \ref{fig:graph} and looking at the paths from \
 
 The following rules were implemented for models.
 \newline
-% \begin{figure}[ht]
 \includegraphics[scale=0.48]{rules.png}
-% \caption{asd}
-% \end{figure}
 \newpage
 \subsection{Predicates for rules}
 In the following table of predicates, a list of propositional letters $L$, a list of visited states along the path $U$ and a predicate $Neighbor(a,b)$ that solves if $a$ and $b$ are neighbors, are assumed.
@@ -118,9 +111,9 @@ In the following table of predicates, a list of propositional letters $L$, a lis
   $Or1(s,\phi,\psi) $ & $Check(s,\phi)$ \\
   $Or2(s,\phi,\psi) $ & $Check(s,\psi)$ \\
   $Or(s,\phi,\psi) $ & $Or1(s,\phi,\psi) \lor Or2(s,\phi,\psi)$ \\
-  $AX(s,\phi) $ & $\forall x : Neighbor(s,x)\land Check(x,phi)$ \\
-  $AG1(U,s,\phi) $ & $s \in U$ \\
-  $AG2(U,s,\phi) $ & \pbox{11cm}{\centering$s \notin U \land Check(s,\phi) \land (\forall x : Neighbor(s,x)\land AG([U|s],x,\phi) \land Check(x,\phi))$} \\
+  $AX(s,\phi) $ & $\forall x : Neighbor(s,x)\land Check(x,\phi)$ \\
+  $AG1(U,s,\phi) $ & $s \in U$ \\[10pt]
+  $AG2(U,s,\phi) $ & \pbox[t]{11cm}{\centering$s \notin U \land Check(s,\phi) \land (\forall x : Neighbor(s,x)\land AG([U|s],x,\phi) \land Check(x,\phi))$} \\[20pt]
   $AG(U,s,\phi) $ & $AG1(U,s,\phi) \lor AG2(U,s,\phi)$ \\
   $AF1(U,s,\phi) $ & $s \notin U \land Check(s,\phi)$ \\
   $AF2(U,s,\phi) $ & $s \notin U \land (\forall x : Neighbor(s,x)\land AF(U,x,\phi))$ \\
@@ -148,18 +141,24 @@ In addition to that the 733 test cases given by KTH also passed with correct res
 \Que{What's the difference between your implementation and the implementation written in the text book?}
 %TODO
 \Ans{
-  contradictions
-  until
-  implications
+  % contradictions
+  % until
+  % implications
+  The implementation found in the text book supports more rules than our does.
+  Contradiction ($\bot$), until ($U$) , implication ($\to$) and tautology ($\top$) is not supported by our implementation.
+  % Contradiction would be used in a situation like this $\{p,\neg p\} \in L(s)$ and would return $true$.
+  % Until is used to describe all the states which does not
 }
+
+% Tvetydligt ifall man har flera labels? E[false, U q]
+% det finns en väg sådant att varje state är falsk tills dess att s_n(q) är uppfyllt.
+% s_m(not(k),not(l))
 
 \Que{How did you handle a variable number of premises in rules?}
 \Ans{We use the built in predicate \textit{member} to iterate over all the neighbors.}
 
 \Que{How big models can you handle with your implementation?}
 \Ans{The time complexity $\mathcal{O}(n^p)$ increases by a factor for each time a rule that is using all neighbors to a state. That means that $p$ is increased by one for each time and we quickly approach a cubic asymptotic progression of the time $\mathcal{O}(n^3)$. This leads to an untenable situation for solving formulas in a reasonable amount of time for bigger models. For example, a model that has $10^3$ neighbors for each state, progressing only three states from the starting state will result in over $10^9$ checks being performed.}
-
-% \mathcal{p} \fraq{-}{}p \in L(s)
 
 \newpage
 \begin{appendices}
